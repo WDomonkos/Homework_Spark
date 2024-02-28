@@ -4,7 +4,7 @@ import ch.hsr.geohash.GeoHash;
 import model.Hotel;
 import org.apache.spark.api.java.function.MapFunction;
 
-public class GenerateGeohashFunction implements MapFunction<Hotel, Hotel> {
+public class GenerateGeohashHotelFunction implements MapFunction<Hotel, Hotel> {
 
     @Override
     public Hotel call(Hotel hotel) throws Exception{

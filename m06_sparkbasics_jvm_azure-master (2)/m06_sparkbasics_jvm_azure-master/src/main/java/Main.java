@@ -1,12 +1,9 @@
-import functions.CheckCoordinatesFunction;
-import functions.GenerateGeohashFunction;
-import functions.ParseHotelDataFunction;
-import functions.ParseWeatherFunction;
+import functions.*;
 import model.Hotel;
 import model.Weather;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.api.java.function.FilterFunction;
+import utils.SchemaUtils;
 
 public class Main {
 
@@ -21,7 +18,7 @@ public class Main {
                         .csv("input/hotels/")
                         .map(new ParseHotelDataFunction(), Encoders.bean(Hotel.class))
                         .map(new CheckCoordinatesFunction(), Encoders.bean(Hotel.class))
-                        .map(new GenerateGeohashFunction(), Encoders.bean(Hotel.class))
+                        .map(new GenerateGeohashHotelFunction(), Encoders.bean(Hotel.class))
                         .as("hotels");
         hotels.show();
 
@@ -29,8 +26,14 @@ public class Main {
                         .schema(SchemaUtils.getWeatherSchema())
                         .parquet("input/weather/")
                         .map(new ParseWeatherFunction(), Encoders.bean(Weather.class))
+                        .map(new GenerateGeohashWeatherFunction(), Encoders.bean(Weather.class))
                         .as("weather");
         weather.show();
+
+        var joined = hotels.join(weather, weather.col("geo_hash").equalTo(hotels.col("geoHash")), "left");
+        joined.show();
+
+
 
         session.stop();
     }
