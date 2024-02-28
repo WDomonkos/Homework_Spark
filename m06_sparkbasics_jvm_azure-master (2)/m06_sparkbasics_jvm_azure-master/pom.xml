@@ -12,13 +12,13 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <kotlin.version>1.5.10</kotlin.version>
     <scala.major.version>2.12</scala.major.version>
     <scala.version>${scala.major.version}.10</scala.version>
 
-    <spark.version>3.1.2</spark.version>
+    <spark.version>3.5.0</spark.version>
     <hadoop.version>3.3.1</hadoop.version>
 
     <isTestSkip>false</isTestSkip>
@@ -35,6 +35,23 @@
       <version>${scala.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!--lombok-->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.30</version>
+        <scope>provided</scope>
+      </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/com.byteowls/jopencage -->
+    <dependency>
+      <groupId>com.byteowls</groupId>
+      <artifactId>jopencage</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
 
     <!--kotlin-->
     <dependency>
