@@ -17,4 +17,7 @@ public class Hotel {
     private String longitude;
     private String geoHash;
 
+    private Double parsetLat;
+    private Double parsetLng;
+
 }
