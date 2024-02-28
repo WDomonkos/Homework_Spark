@@ -33,6 +33,10 @@ public class Main {
         var joined = hotels.join(weather, weather.col("geo_hash").equalTo(hotels.col("geoHash")), "left");
         joined.show();
 
+        joined.write()
+                        .partitionBy("year", "month")
+                        .parquet(String.format("output/%s", session.sparkContext().applicationId()));
+
 
 
         session.stop();
