@@ -1,3 +1,4 @@
+import functions.CheckCoordinatesFunction;
 import functions.ParseHotelDataFunction;
 import model.Hotel;
 import org.apache.spark.sql.Encoders;
@@ -16,6 +17,7 @@ public class Main {
                         .option("header", true)
                         .csv("input/hotels/")
                         .map(new ParseHotelDataFunction(), Encoders.bean(Hotel.class))
+                        .map(new CheckCoordinatesFunction(), Encoders.bean(Hotel.class))
                         .as("hotels");
         hotels.show();
 
