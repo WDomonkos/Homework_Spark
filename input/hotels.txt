@@ -1,5 +1,0 @@
-line first
-line second
-line thirst
-line fourth
-line fifth
